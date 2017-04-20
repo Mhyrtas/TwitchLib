@@ -10,7 +10,7 @@ namespace TwitchLib.Events.Client
         /// <summary>Viewer that was timedout.</summary>
         public string Username;
         /// <summary>Duration of timeout IN SECONDS.</summary>
-        public int TimeoutDuration;
+        public TimeSpan TimeoutDuration;
         /// <summary>Reason for timeout, if it was provided.</summary>
         public string TimeoutReason;
     }

@@ -66,6 +66,11 @@
     <Compile Include="Exceptions\Client\BadListenException.cs" />
     <Compile Include="Exceptions\Client\IllegalAssignmentException.cs" />
     <Compile Include="Exceptions\Services\UnitializedChannelList.cs" />
+    <Compile Include="Internal\Parsing\Parsers\Clearchat.cs" />
+    <Compile Include="Internal\Parsing\Parsers\Names.cs" />
+    <Compile Include="Internal\Parsing\Parsers\Join.cs" />
+    <Compile Include="Internal\Parsing\Parsers\Mode.cs" />
+    <Compile Include="Internal\Parsing\Parsers\Part.cs" />
     <Compile Include="Internal\Rfc2812.cs" />
     <Compile Include="Internal\WebSocketClient.cs" />
     <Compile Include="Models\API\Channel\ChannelEventsResponse.cs" />
@@ -178,7 +183,7 @@
     <Compile Include="Extensions\Client\SubscribersOnly.cs" />
     <Compile Include="Extensions\Client\TimeoutUserExt.cs" />
     <Compile Include="Extensions\Client\UnbanUserExt.cs" />
-    <Compile Include="Internal\Parsing\Chat.cs" />
+    <Compile Include="Internal\Parsing\Parser.cs" />
     <Compile Include="Internal\Requests.cs" />
     <Compile Include="Models\API\Badge\Badge.cs" />
     <Compile Include="Models\API\Block\Block.cs" />
@@ -219,7 +224,6 @@
     <Compile Include="Exceptions\API\BadScopeException.cs" />
     <Compile Include="Exceptions\API\InvalidCredentialException.cs" />
     <Compile Include="Models\Client\CheerBadge.cs" />
-    <Compile Include="Models\Client\DetectionReturn.cs" />
     <Compile Include="Models\Client\ErrorEvent.cs" />
     <Compile Include="Models\Client\JoinedChannel.cs" />
     <Compile Include="Models\Client\MessageEmote.cs" />
@@ -250,7 +254,6 @@
     <Compile Include="TwitchClient.cs" />
     <Compile Include="Models\Client\SentMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Internal\Parsing\Whisper.cs" />
     <Compile Include="Models\Client\UserState.cs" />
     <Compile Include="Models\Client\WhisperMessage.cs" />
     <Compile Include="TwitchPubSub.cs" />
