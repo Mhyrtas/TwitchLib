@@ -2,19 +2,19 @@
 {
     #region using directives
     using System;
-    using System.Timers;
+    //using System.Timers;
     #endregion
     /// <summary>Class used to throttle chat and whsiper messages to enforce guidelines.</summary>
     public class MessageThrottler
     {
-        private Timer _periodTimer = new Timer();
+        //private Timer _periodTimer = new Timer();
         private TimeSpan _periodDuration;
         private int _currentMessageCount;
 
         /// <summary>Property representing number of messages allowed before throttling in a period.</summary>
         public int MessagesAllowedInPeriod { get; set; }
         /// <summary>Property representing the time period for throttling.</summary>
-        public TimeSpan PeriodDuration { get { return _periodDuration; } set { _periodDuration = value; _periodTimer.Interval = value.TotalMilliseconds; } }
+        //public TimeSpan PeriodDuration { get { return _periodDuration; } set { _periodDuration = value; _periodTimer.Interval = value.TotalMilliseconds; } }
         /// <summary>Property representing minimum message length for throttling.</summary>
         public int MinimumMessageLengthAllowed { get; set; }
         /// <summary>Property representing maximum message length before throttling.</summary>
@@ -26,25 +26,25 @@
         public MessageThrottler(int messagesAllowedInPeriod, TimeSpan periodDuration, bool applyThrottlingToRawMessages = false, int minimumMessageLengthAllowed = -1, int maximumMessageLengthAllowed = -1)
         {
             MessagesAllowedInPeriod = messagesAllowedInPeriod;
-            PeriodDuration = periodDuration;
+            //PeriodDuration = periodDuration;
             MinimumMessageLengthAllowed = minimumMessageLengthAllowed;
             MaximumMessageLengthAllowed = maximumMessageLengthAllowed;
 
-            _periodTimer.Elapsed += periodTimerElapsed;
+            //_periodTimer.Elapsed += periodTimerElapsed;
         }
 
         /// <summary>Function that verifies a message is legal, returns true/false on message legality.</summary>
         public bool MessagePermitted(string message)
         {
-            if (!_periodTimer.Enabled)
-                _periodTimer.Start();
+            //if (!_periodTimer.Enabled)
+            //    _periodTimer.Start();
             if (message.Length > MaximumMessageLengthAllowed && MaximumMessageLengthAllowed != -1)
             {
                 OnClientThrottled?.Invoke(this,
                     new Events.Services.MessageThrottler.OnClientThrottledArgs
                     {
                         Message = message,
-                        PeriodDuration = PeriodDuration,
+                        //PeriodDuration = PeriodDuration,
                         ThrottleViolation = Enums.ThrottleType.MessageTooLong
                     });
                 return false;
@@ -55,7 +55,7 @@
                     new Events.Services.MessageThrottler.OnClientThrottledArgs
                     {
                         Message = message,
-                        PeriodDuration = PeriodDuration,
+                        //PeriodDuration = PeriodDuration,
                         ThrottleViolation = Enums.ThrottleType.MessageTooShort
                     });
                 return false;
@@ -66,7 +66,7 @@
                     new Events.Services.MessageThrottler.OnClientThrottledArgs
                     {
                         Message = message,
-                        PeriodDuration = PeriodDuration,
+                        //PeriodDuration = PeriodDuration,
                         ThrottleViolation = Enums.ThrottleType.TooManyMessages
                     });
                 return false;
@@ -77,13 +77,13 @@
         }
 
         #region HELPERS
-        private void periodTimerElapsed(object sender, ElapsedEventArgs e)
+        /*private void periodTimerElapsed(object sender, ElapsedEventArgs e)
         {
             _periodTimer.Stop();
             OnThrottledPeriodReset?.Invoke(this,
                 new Events.Services.MessageThrottler.OnThrottlePeriodResetArgs { TimeInPeriod = PeriodDuration });
             _currentMessageCount = 0;
-        }
+        }*/
         #endregion
 
         #region EVENTS

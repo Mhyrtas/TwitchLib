@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Timers;
+//using System.Timers;
 using TwitchLib.Exceptions.Services;
 using TwitchLib.Exceptions.API;
 using TwitchLib.Events.Services.FollowerService;
@@ -14,7 +14,7 @@ namespace TwitchLib.Services
         private string _channel, _clientId;
         private int _queryCount, _checkIntervalSeconds;
 
-        private Timer _followerServiceTimer = new Timer();
+        //private Timer _followerServiceTimer = new Timer();
         /// <summary>Property representing Twitch channel service is monitoring.</summary>
         public string ChannelData { get { return _channel; } protected set { _channel = value; } }
         /// <summary>Property representing whether channeldata is a channel name or channel id.</summary>
@@ -29,7 +29,7 @@ namespace TwitchLib.Services
         /// <summary>Property representing the cache where detected followers are stored and compared against.</summary>
         public List<string> ActiveCache { get; set; }
         /// <summary>Property representing interval between Twitch Api calls, in seconds. Recommended: 60</summary>
-        public int CheckIntervalSeconds { get { return _checkIntervalSeconds; } set { _checkIntervalSeconds = value; _followerServiceTimer.Interval = value * 1000; } }
+        //public int CheckIntervalSeconds { get { return _checkIntervalSeconds; } set { _checkIntervalSeconds = value; _followerServiceTimer.Interval = value * 1000; } }
 
         /// <summary>Service constructor.</summary>
         /// <exception cref="BadResourceException">If channel is invalid, an InvalidChannelException will be thrown.</exception>
@@ -38,9 +38,9 @@ namespace TwitchLib.Services
         /// <param name="clientId">Optional param representing Twitch Api-required application client id, not required if already set.</param>
         public FollowerService(int checkIntervalSeconds = 60, int queryCount = 25, string clientId = "")
         {
-            CheckIntervalSeconds = checkIntervalSeconds;
+            //CheckIntervalSeconds = checkIntervalSeconds;
             QueryCount = queryCount;
-            _followerServiceTimer.Elapsed += _followerServiceTimerElapsed;
+            //_followerServiceTimer.Elapsed += _followerServiceTimerElapsed;
             if (clientId != "")
                 ClientId = clientId;
         }
@@ -66,17 +66,17 @@ namespace TwitchLib.Services
                     ActiveCache.Add(follower.User.Name);
             }
             
-            _followerServiceTimer.Start();
-            OnServiceStarted?.Invoke(this, 
-                new OnServiceStartedArgs { ChannelIdentifier = ChannelIdentifier, ChannelData = ChannelData, CheckIntervalSeconds = CheckIntervalSeconds, QueryCount = QueryCount });
+            //_followerServiceTimer.Start();
+            //OnServiceStarted?.Invoke(this, 
+            //    new OnServiceStartedArgs { ChannelIdentifier = ChannelIdentifier, ChannelData = ChannelData, CheckIntervalSeconds = CheckIntervalSeconds, QueryCount = QueryCount });
         }
 
         /// <summary>Stops service and fires OnServiceStopped event.</summary>
         public void StopService()
         {
-            _followerServiceTimer.Stop();
-            OnServiceStopped?.Invoke(this,
-                new OnServiceStoppedArgs { ChannelIdentifier = ChannelIdentifier, ChannelData = ChannelData, CheckIntervalSeconds = CheckIntervalSeconds, QueryCount = QueryCount });
+            //_followerServiceTimer.Stop();
+            //OnServiceStopped?.Invoke(this,
+            //    new OnServiceStoppedArgs { ChannelIdentifier = ChannelIdentifier, ChannelData = ChannelData, CheckIntervalSeconds = CheckIntervalSeconds, QueryCount = QueryCount });
         }
 
         /// <summary>Tells FollowerService to request the channel by the channel name.</summary>
@@ -96,7 +96,7 @@ namespace TwitchLib.Services
         }
         #endregion
 
-        private async void _followerServiceTimerElapsed(object sender, ElapsedEventArgs e)
+        /*private async void _followerServiceTimerElapsed(object sender, ElapsedEventArgs e)
         {
             List<string> mostRecentFollowers = new List<string>();
             try
@@ -152,7 +152,7 @@ namespace TwitchLib.Services
                         NewFollowers = newFollowers
                     });
             }
-        }
+        }*/
 
 
         #region EVENTS

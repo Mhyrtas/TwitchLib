@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Timers;
+    //using System.Timers;
 
     using Enums;
     using Events.Services.LiveStreamMonitor;
@@ -19,7 +19,7 @@
         private int _checkIntervalSeconds;
         private List<string> _channels;
         private Dictionary<string, bool> _statuses;
-        private readonly Timer _streamMonitorTimer = new Timer();
+        //private readonly Timer _streamMonitorTimer = new Timer();
         private StreamIdentifierType _identifierType;
         #endregion
         #region Public Variables
@@ -28,7 +28,7 @@
         /// <summary>Property representing application client Id, also updates it in TwitchApi.</summary>
         public string ClientId { get { return _clientId; } set { _clientId = value; TwitchAPI.Settings.ClientId = value; } }
         /// <summary>Property representing interval between Twitch Api calls, in seconds. Recommended: 60</summary>
-        public int CheckIntervalSeconds { get { return _checkIntervalSeconds; } set { _checkIntervalSeconds = value; _streamMonitorTimer.Interval = value * 1000; } }
+        //public int CheckIntervalSeconds { get { return _checkIntervalSeconds; } set { _checkIntervalSeconds = value; _streamMonitorTimer.Interval = value * 1000; } }
         /// <summary>Property representing whether streams are represented by usernames or userids</summary>
         public StreamIdentifierType IdentifierType { get { return _identifierType; } protected set { _identifierType = value; } }
         #endregion
@@ -50,8 +50,8 @@
         /// <param name="clientId">Optional param representing Twitch Api-required application client id, not required if already set.</param>
         public LiveStreamMonitor(int checkIntervalSeconds = 60, string clientId = "")
         {
-            CheckIntervalSeconds = checkIntervalSeconds;
-            _streamMonitorTimer.Elapsed += _streamMonitorTimerElapsed;
+            //CheckIntervalSeconds = checkIntervalSeconds;
+            //_streamMonitorTimer.Elapsed += _streamMonitorTimerElapsed;
             if (clientId != "")
                 ClientId = clientId;
         }
@@ -68,17 +68,17 @@
             {
                 _statuses.Add(channel, await _checkStreamOnline(channel));
             }
-            _streamMonitorTimer.Start();
-            OnStreamMonitorStarted?.Invoke(this,
-                new OnStreamMonitorStartedArgs { Channels = Channels, IdentifierType = IdentifierType, CheckIntervalSeconds = CheckIntervalSeconds });
+            //_streamMonitorTimer.Start();
+            //OnStreamMonitorStarted?.Invoke(this,
+            //    new OnStreamMonitorStartedArgs { Channels = Channels, IdentifierType = IdentifierType, CheckIntervalSeconds = CheckIntervalSeconds });
         }
 
         /// <summary>Stops service and fires OnStreamMonitorStopped event.</summary>
         public void StopService()
         {
-            _streamMonitorTimer.Stop();
-            OnStreamMonitorEnded?.Invoke(this,
-               new OnStreamMonitorEndedArgs { Channels = Channels, IdentifierType = IdentifierType, CheckIntervalSeconds = CheckIntervalSeconds });
+            //_streamMonitorTimer.Stop();
+            //OnStreamMonitorEnded?.Invoke(this,
+            //   new OnStreamMonitorEndedArgs { Channels = Channels, IdentifierType = IdentifierType, CheckIntervalSeconds = CheckIntervalSeconds });
         }
         /// <summary> Sets the list of channels to monitor by username </summary>
         /// <param name="usernames">List of channels to monitor as usernames</param>
@@ -93,12 +93,12 @@
         {
             _channels = userids;
             _identifierType = StreamIdentifierType.UserIds;
-            OnStreamsSet?.Invoke(this,
-                new OnStreamsSetArgs { Channels = Channels, IdentifierType = IdentifierType, CheckIntervalSeconds = CheckIntervalSeconds });
+            //OnStreamsSet?.Invoke(this,
+            //   new OnStreamsSetArgs { Channels = Channels, IdentifierType = IdentifierType, CheckIntervalSeconds = CheckIntervalSeconds });
         }
         #endregion
 
-        private async void _streamMonitorTimerElapsed(object sender, ElapsedEventArgs e)
+        /*private async void _streamMonitorTimerElapsed(object sender, ElapsedEventArgs e)
         {
             foreach (string channel in Channels)
             {
@@ -116,7 +116,7 @@
                     _statuses[channel] = false;
                 }
             }
-        }
+        }*/
         private async Task<bool> _checkStreamOnline(string channel)
         {
             switch (_identifierType)

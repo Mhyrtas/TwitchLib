@@ -3,7 +3,6 @@ namespace TwitchLib.Models.Client
     #region using directives
     using System;
     using System.Collections.Generic;
-    using System.Drawing;
     using System.Linq;
     #endregion
     /// <summary>Class representing a resubscriber.</summary>
@@ -14,7 +13,7 @@ namespace TwitchLib.Models.Client
         /// <summary>Property representing the colorhex of the resubscriber.</summary>
         public string ColorHex { get; protected set; }
         /// <summary>Property representing HEX color as a System.Drawing.Color object.</summary>
-        public Color Color { get; protected set; }
+        //public Color Color { get; protected set; }
         /// <summary>Property representing resubscriber's customized display name.</summary>
         public string DisplayName { get; protected set; }
         /// <summary>Property representing emote set of resubscriber.</summary>
@@ -84,8 +83,8 @@ namespace TwitchLib.Models.Client
                             break;
                         case "color":
                             ColorHex = value;
-                            if (!string.IsNullOrEmpty(ColorHex))
-                                Color = ColorTranslator.FromHtml(ColorHex);
+                            //if (!string.IsNullOrEmpty(ColorHex))
+                            //    Color = ColorTranslator.FromHtml(ColorHex);
                             break;
                         case "display-name":
                             DisplayName = value.Replace(" ", "");

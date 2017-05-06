@@ -3,7 +3,6 @@
     #region using directives
     using System;
     using System.Collections.Generic;
-    using System.Drawing;
     using System.Linq;
     #endregion
     /// <summary>Class represents ChatMessage in a Twitch channel.</summary>
@@ -21,8 +20,6 @@
         public string DisplayName { get; protected set; }
         /// <summary>Hex representation of username color in chat (THIS CAN BE NULL IF VIEWER HASN'T SET COLOR).</summary>
         public string ColorHex { get; protected set; }
-        /// <summary>Property representing HEX color as a System.Drawing.Color object.</summary>
-        public Color Color { get; protected set; }
         /// <summary>Emote Ids that exist in message.</summary>
         public EmoteSet EmoteSet { get; protected set; }
         /// <summary>Twitch chat message contents.</summary>
@@ -136,8 +133,8 @@
                 {
                     if (ColorHex == null)
                         ColorHex = part.Split('=')[1];
-                    if (!string.IsNullOrEmpty(ColorHex))
-                        Color = ColorTranslator.FromHtml(ColorHex);
+                    //if (!string.IsNullOrEmpty(ColorHex))
+                    //    Color = ColorTranslator.FromHtml(ColorHex);
                 }
                 else if (part.Contains("display-name"))
                 {

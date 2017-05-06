@@ -2,7 +2,7 @@ namespace TwitchLib.Models.Client
 {
     #region using directives
     using System.Collections.Generic;
-    using System.Drawing;
+    //using System.Drawing;
     using System.Linq;
     #endregion
     /// <summary>Class representing a received whisper from TwitchWhisperClient</summary>
@@ -13,7 +13,7 @@ namespace TwitchLib.Models.Client
         /// <summary>Property representing HEX representation of color of username.</summary>
         public string ColorHex { get; protected set; }
         /// <summary>Property representing HEX color as a System.Drawing.Color object.</summary>
-        public Color Color { get; protected set; }
+        //public Color Color { get; protected set; }
         /// <summary>Property representing sender Username.</summary>
         public string Username { get; protected set; }
         /// <summary>Property representing sender DisplayName (can be null/blank).</summary>
@@ -67,8 +67,8 @@ namespace TwitchLib.Models.Client
 
                     case "color":
                         ColorHex = value;
-                        if (!string.IsNullOrEmpty(ColorHex))
-                            Color = ColorTranslator.FromHtml(ColorHex);
+                        //if (!string.IsNullOrEmpty(ColorHex))
+                        //    Color = ColorTranslator.FromHtml(ColorHex);
                         break;
 
                     case "display-name":

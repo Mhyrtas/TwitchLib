@@ -3,7 +3,6 @@
     #region using directives
     using System;
     using System.Linq;
-    using System.Timers;
 
     using Newtonsoft.Json.Linq;
 
@@ -18,7 +17,7 @@
         private WebSocket socket;
         private Models.PubSub.PreviousRequest previousRequest;
         private bool logging;
-        private Timer pingTimer = new Timer();
+        //private Timer pingTimer = new Timer();
 
         /*
         NON-IMPLEMENTED AVAILABLE TOPICS (i'm aware of):
@@ -109,19 +108,19 @@
         {
             if (logging)
                 Console.WriteLine($"[TwitchPubSub]OnOpen!");
-            pingTimer.Interval = 180000;
-            pingTimer.Elapsed += pingTimerTick;
-            pingTimer.Start();
+            //pingTimer.Interval = 180000;
+            //pingTimer.Elapsed += pingTimerTick;
+            //pingTimer.Start();
             OnPubSubServiceConnected?.Invoke(this, null);
         }
 
-        private void pingTimerTick(object sender, System.Timers.ElapsedEventArgs e)
+        /*private void pingTimerTick(object sender, System.Timers.ElapsedEventArgs e) 
         {
             JObject data = new JObject(
                 new JProperty("type", "PING")
             );
             socket.Send(data.ToString());
-        }
+        }*/
 
         private void parseMessage(string message)
         {
